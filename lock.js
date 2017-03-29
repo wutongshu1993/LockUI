@@ -210,12 +210,18 @@
             }
         }
         else if(this.pswObj.step == 2){
-
-            if(this.checkPass(JSON.parse(window.localStorage.getItem('passwordlk')), psw)){
-                document.getElementById('msg').innerHTML = '密码正确！';
+            if(window.localStorage.getItem('passwordlk')== null){
+                document.getElementById('msg').innerHTML = '请先设置密码！';
+                document.getElementById('resetPass').checked = 'checked';
+                this.pswObj.step = 0;
             }
             else {
-                document.getElementById('msg').innerHTML = '输入密码不正确';
+                if(this.checkPass(JSON.parse(window.localStorage.getItem('passwordlk')), psw)){
+                    document.getElementById('msg').innerHTML = '密码正确！';
+                }
+                else {
+                    document.getElementById('msg').innerHTML = '输入密码不正确';
+                }
             }
         }
 
