@@ -206,11 +206,12 @@
             }
             else {
                 document.getElementById('msg').innerHTML = '两次输入不一致';
-                this.pswObj.step = 0;
+                // this.pswObj.step = 0;
             }
         }
         else if(this.pswObj.step == 2){
-            if(this.checkPass(this.pswObj.truePass, psw)){
+
+            if(this.checkPass(JSON.parse(window.localStorage.getItem('passwordlk')), psw)){
                 document.getElementById('msg').innerHTML = '密码正确！';
             }
             else {
