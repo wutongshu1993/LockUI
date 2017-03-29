@@ -1,0 +1,19 @@
+.wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.lockCanvas{
+    background-color: #ffffff;
+    display: inline-block;
+    margin-top: 15px;
+}
+.radioRect{
+    margin: 0 auto;
+    line-height: 2em;
+    width: 300px;
+    text-align: left;
+}
+
