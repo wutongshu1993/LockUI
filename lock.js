@@ -146,18 +146,21 @@
      * @param lastPoint
      */
     Lock.prototype.drawLine = function (po, lastPoint) {
-        this.ctx.save();
-        this.ctx.beginPath();
-        this.ctx.strokeStyle = 'red';
-        this.ctx.lineWidth = 3;
-        this.ctx.moveTo(this.lastPoint[0].x, this.lastPoint[0].y);
-        for(var i = 1; i < lastPoint.length; i++){
-            this.ctx.lineTo(this.lastPoint[i].x, this.lastPoint[i].y);
-        }
-        this.ctx.lineTo(po.x, po.y);
-        this.ctx.stroke();
-        this.ctx.closePath();
-        this.ctx.restore();
+                this.ctx.save();
+                this.ctx.beginPath();
+                this.ctx.strokeStyle = 'red';
+                this.ctx.lineWidth = 3;
+                this.ctx.moveTo(this.lastPoint[0].x, this.lastPoint[0].y);
+                for(var i = 1; i < lastPoint.length; i++){
+                    this.ctx.lineTo(this.lastPoint[i].x, this.lastPoint[i].y);
+                }
+                if(po !== undefined){
+                    this.ctx.lineTo(po.x, po.y);
+                }
+
+                this.ctx.stroke();
+                this.ctx.closePath();
+                this.ctx.restore();
     };
     Lock.prototype.update = function (po) {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
@@ -169,12 +172,15 @@
         var self = this;
         // console.log(self.arr.length)
         for(var i = 0; i < self.restPoint.length; i++){
-            if(Math.abs(po.x - self.restPoint[i].x) < self.r && Math.abs(po.y - self.restPoint[i].y) < self.r){
-                self.drawPoint();
-                self.lastPoint.push(self.restPoint[i]);
-                self.restPoint.splice(i, 1);
-                break;
+            if(po !== undefined){
+                if(Math.abs(po.x - self.restPoint[i].x) < self.r && Math.abs(po.y - self.restPoint[i].y) < self.r){
+                    self.drawPoint();
+                    self.lastPoint.push(self.restPoint[i]);
+                    self.restPoint.splice(i, 1);
+                    break;
+                }
             }
+
         }
     };
     /**
@@ -279,6 +285,7 @@
             console.log(self.lastPoint);
             if(self.touchFlag){
                 self.touchFlag = false;
+                self.update();
                 self.storePass(self.lastPoint);
                 setTimeout(function () {
                     self.reset();
@@ -288,5 +295,6 @@
             }
         })
     }
+
 
 })();

@@ -13,7 +13,10 @@
 
 默认进入的时候是选中的‘设置密码’，因此状态为step=0，当选中‘验证密码’的时候，状态变为step=2.如果用户在未设置密码时直接选‘验证密码’，则提示‘请先设置密码’，并且选中‘设置密码’。
 
-这里需要注意的是，每一次canvas的touchStart开始的时候，都需要将lastPoint置为空，并将restPoint置为arr中的值。
+### 需要注意的是
+1. 每一次canvas的touchStart开始的时候，都需要将lastPoint置为空，并将restPoint置为arr中的值。
+2. 如果最后的结束不在圆圈上，该条线段也是无效的。线段最后的结束需要把小勾去掉。实现的方法是采用在touchend的时候再根据lastpoint中的值再绘制一次。
+3. 重复设置某个点的时候，该点应该是无效的。
 
 ## 手机在线访问链接
 https://wutongshu1993.github.io/LockUI/
